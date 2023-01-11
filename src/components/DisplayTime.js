@@ -75,6 +75,7 @@ const DisplayTime = () => {
 
   return (
     <>
+      <h1>Pomodoro Clock</h1>
       <div className='mainDisplay'>
         <BreakTime
           breakTime={breakTime}
@@ -90,17 +91,19 @@ const DisplayTime = () => {
         />
       </div>
       <div className="timerDisplay">
-        <h3 className='status'>{onBreak ? "Break Time" : "Work Time"}</h3>
-        <h1>{formateTime(displayTime)}</h1>
-        <button onClick={handlePlayPause}>
-          {timerOn ? <FontAwesomeIcon icon={faCirclePause} /> :
-            <FontAwesomeIcon icon={faPlayCircle} />}
-        </button>
-        <button className='reset' onClick={handleReset}>
-          <FontAwesomeIcon icon={faSync} />
-        </button>
+        <h2 className='status'>{onBreak ? "Break Time" : "Work Time"}</h2>
+        <d1><b>{formateTime(displayTime)}</b></d1>
+        <div className='controlBtn' onClick={handlePlayPause}>
+          <div className='playpause'>
+            {timerOn ? <FontAwesomeIcon icon={faCirclePause} /> :
+              <FontAwesomeIcon icon={faPlayCircle} />}
+          </div>
+          <div className='reset' onClick={handleReset}>
+            <FontAwesomeIcon icon={faSync} />
+          </div>
+        </div>
       </div>
-
+      <i>-by Agnivesh</i>
     </>
   )
 }

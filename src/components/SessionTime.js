@@ -18,11 +18,11 @@ const SessionTime = ({sessionTime, setSessionTime, timerOn, formateTime, setDisp
     <div>
       <h3>Session Time</h3>
       <div className="breakClass">
-        <button onClick={() => handleClick(-60)}>
+        <button className='downBtn' onClick={() => handleClick(-60)}>
           <FontAwesomeIcon icon={faLongArrowAltDown} />
         </button>
         <h3>{formateTime(sessionTime)}</h3>
-        <button onClick={() => handleClick(+60)}>
+        <button className='upBtn' onClick={() => handleClick(+60)}>
           <FontAwesomeIcon icon={faLongArrowAltUp} />
         </button>
       </div>

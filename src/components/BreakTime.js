@@ -16,11 +16,11 @@ const BreakTime = ({ breakTime, setBreakTime, formateTime }) => {
     <div>
       <h3>Break Time</h3>
       <div className="breakClass">
-        <button onClick={() => handleClick(-60)}>
+        <button className='downBtn' onClick={() => handleClick(-60)}>
           <FontAwesomeIcon icon={faLongArrowAltDown} />
         </button>
         <h3>{formateTime(breakTime)}</h3>
-        <button onClick={() => handleClick(+60)}>
+        <button className='upBtn' onClick={() => handleClick(+60)}>
           <FontAwesomeIcon icon={faLongArrowAltUp} />
         </button>
       </div>
