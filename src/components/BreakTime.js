@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import './components.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faS } from '@fortawesome/free-solid-svg-icons';
 import { faLongArrowAltUp, faLongArrowAltDown } from '@fortawesome/free-solid-svg-icons';
 
-const BreakTime = ({ formateTime }) => {
-  const [breakTime, setBrealTime] = useState(5 * 60);
+const BreakTime = ({ breakTime, setBreakTime, formateTime }) => {
+
+  const handleClick = (btnAmount) => {
+    if (breakTime < 60 && btnAmount < 0) {
+      return;
+    }
+    setBreakTime(prev => prev + btnAmount)
+  }
 
   return (
     <div>
       <h3>Break Time</h3>
       <div className="breakClass">
-        <button>
-          <FontAwesomeIcon icon={faLongArrowAltUp} />
+        <button onClick={() => handleClick(-60)}>
+          <FontAwesomeIcon icon={faLongArrowAltDown} />
         </button>
-        <h4>{formateTime(breakTime)}</h4>
-        <button>
+        <h3>{formateTime(breakTime)}</h3>
+        <button onClick={() => handleClick(+60)}>
           <FontAwesomeIcon icon={faLongArrowAltUp} />
         </button>
       </div>

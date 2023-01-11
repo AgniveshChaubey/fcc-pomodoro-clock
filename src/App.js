@@ -1,3 +1,4 @@
+import './App.css'
 import DisplayTime from './components/DisplayTime';
 
 function App() {

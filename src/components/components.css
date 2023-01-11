@@ -1,12 +1,18 @@
+.mainDisplay{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+    background-color: red;
+    width: 650px;
+    
+}
 .breakClass{
     display: grid;
     grid-template-columns: 50px 100px 50px;
-}
 
-.dis1{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    margin: auto;
+    width: 203px;
+    border: 3px solid rgb(0, 0, 0);
+    padding: 10px;
+    
 }
