@@ -5,12 +5,20 @@ import BreakTime from './BreakTime';
 import SessionTime from './SessionTime';
 
 const DisplayTime = () => {
-  const [sessionTime, setSessionTime] = useState(5);
-  const [displayTime, setDisplayTime] = useState(5);
-  const [breakTime, setBreakTime] = useState(3);
+  const [sessionTime, setSessionTime] = useState(25 * 60);
+  const [displayTime, setDisplayTime] = useState(25 * 60);
+  const [breakTime, setBreakTime] = useState(5 * 60);
   const [timerOn, setTimerOn] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
-  const [breakAudio, setBreakAudio] = useState(new Audio('./clockRunning.mp3'));
+  const [breakAudio, setBreakAudio] = useState(
+    new Audio("./clockRinging.mp3")
+  );
+
+  const playSound = () => {
+    breakAudio.currentTime = 0;
+    //setTimeout or timeMode
+    breakAudio.play();
+  }
 
   const formateTime = (time) => {
     var minutes = Math.floor(time / 60);
@@ -21,18 +29,12 @@ const DisplayTime = () => {
     )
   }
 
-  const playSound = () => {
-    breakAudio.currentTime = 0;
-    breakAudio.play();
-    //setTimeout or timeMode
-  }
-
   const handlePlayPause = () => {
     let second = 1000;
     let date = new Date().getTime();
     let nextDate = new Date().getTime() + second;
     let onBreakVariable = onBreak;
-    
+
     if (!timerOn) {
       let interval = setInterval(() => {
         date = new Date().getTime();
@@ -40,20 +42,20 @@ const DisplayTime = () => {
           setDisplayTime(previous => {
             if (previous <= 0 && !onBreakVariable) {
               // playSound();
-              onBreakVariable = true;
+              // onBreakVariable = true;
               setOnBreak(true);
               console.log(onBreakVariable);
               return breakTime;
             } else if (previous <= 0 && onBreakVariable) {
               // playSound();
               onBreakVariable = false;
-              setOnBreak(false);
+              // setOnBreak(false);
               console.log(onBreakVariable);
               return sessionTime;
             }
             return previous - 1;
           });
-          nextDate =nextDate + second;
+          nextDate = nextDate + second;
         }
       }, 30);
       localStorage.clear();
@@ -63,8 +65,6 @@ const DisplayTime = () => {
       clearInterval(localStorage.getItem('interval-id'))
     }
     setTimerOn(!timerOn);
-    // console.log(date)
-    // console.log(nextDate)
   };
 
   const handleReset = () => {
@@ -76,7 +76,11 @@ const DisplayTime = () => {
   return (
     <>
       <div className='mainDisplay'>
-        <BreakTime breakTime={breakTime} setBreakTime={setBreakTime} formateTime={formateTime} />
+        <BreakTime
+          breakTime={breakTime}
+          setBreakTime={setBreakTime}
+          formateTime={formateTime}
+        />
         <SessionTime
           sessionTime={sessionTime}
           setSessionTime={setSessionTime}
@@ -86,7 +90,7 @@ const DisplayTime = () => {
         />
       </div>
       <div className="timerDisplay">
-      <h3>{ onBreak ? "Break Time" : "Work Time"}</h3>
+        <h3 className='status'>{onBreak ? "Break Time" : "Work Time"}</h3>
         <h1>{formateTime(displayTime)}</h1>
         <button onClick={handlePlayPause}>
           {timerOn ? <FontAwesomeIcon icon={faCirclePause} /> :
@@ -96,6 +100,7 @@ const DisplayTime = () => {
           <FontAwesomeIcon icon={faSync} />
         </button>
       </div>
+
     </>
   )
 }
