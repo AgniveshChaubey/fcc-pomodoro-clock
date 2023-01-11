@@ -1,0 +1,12 @@
+.breakClass{
+    display: grid;
+    grid-template-columns: 50px 100px 50px;
+}
+
+.dis1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
